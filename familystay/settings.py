@@ -11,7 +11,12 @@ SECRET_KEY = 'django-insecure-your-secret-key-here'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']  # Update this in production
+CORS_ALLOW_ALL_ORIGINS = True  
+
+ALLOWED_HOSTS = [ 'localhost',
+    '127.0.0.1',
+    "https://3262-38-226-202-130.ngrok-free.app",
+    '.ngrok.io',]  
 
 # Application definition
 INSTALLED_APPS = [
@@ -135,7 +140,9 @@ SIMPLE_JWT = {
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Next.js default port
+    "https://familystay.vercel.app",
+    "http://localhost:3000",  
     "http://127.0.0.1:3000",
+    "https://3262-38-226-202-130.ngrok-free.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
