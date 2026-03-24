@@ -1,6 +1,7 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,9 +14,11 @@ DEBUG = True
 
 CORS_ALLOW_ALL_ORIGINS = True  
 
-ALLOWED_HOSTS = [ 'localhost',
+ALLOWED_HOSTS = [ 
+    'localhost',
     '127.0.0.1',
-    "https://3262-38-226-202-130.ngrok-free.app",
+    '.ngrok-free.app',
+    "https://fa4e-38-226-202-130.ngrok-free.app",
     '.ngrok.io',]  
 
 # Application definition
@@ -143,6 +146,35 @@ CORS_ALLOWED_ORIGINS = [
     "https://familystay.vercel.app",
     "http://localhost:3000",  
     "http://127.0.0.1:3000",
-    "https://3262-38-226-202-130.ngrok-free.app",
+    "https://fa4e-38-226-202-130.ngrok-free.app",
+    "https://familystay-fronend-8phihktck-peterkanumes-projects.vercel.app",
+]
+CORS_ALLOWED_ORIGINS_REGEX = [
+    r'^https://.*\.ngrok-free\.app$',
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'https://fa4e-38-226-202-130.ngrok-free.app',
+    'https://familystay-fronend-8phihktck-peterkanumes-projects.vercel.app',
+    "https://familystay.vercel.app",  
+    
+]
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "ngrok-skip-browser-warning",
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
+
+# In your base URL configuration
+if not DEBUG:
+    # Force HTTPS in production
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+DEFAULT_FILE_STORAGE = 'apps.properties.storage.HTTPSFileSystemStorage'
